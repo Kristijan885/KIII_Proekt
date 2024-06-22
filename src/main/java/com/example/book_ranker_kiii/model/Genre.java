@@ -1,0 +1,31 @@
+package com.example.book_ranker_kiii.model;
+
+public enum Genre {
+    CLASSICAL,
+    MACEDONIAN,
+    ENGLISH,
+    GERMAN,
+    FANTASY,
+    SCIENCE_FICTION,
+    MYSTERY,
+    THRILLER,
+    ROMANCE,
+    HORROR,
+    HISTORICAL,
+    NON_FICTION,
+    BIOGRAPHY,
+    AUTOBIOGRAPHY,
+    POETRY,
+    DRAMA,
+    ADVENTURE,
+    CRIME,
+    YOUNG_ADULT,
+    CHILDREN,
+    PHILOSOPHY,
+    RELIGION,
+    SELF_HELP,
+    SCIENCE,
+    TRAVEL,
+    EROTICA,
+    DYSTOPIAN
+}

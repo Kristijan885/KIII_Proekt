@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>WP Exam - Books</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('/background.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: #f5f5dc; /* Fallback color */
+      color: #4b3621;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .navbar, .footer {
+      background-color: #4b3621;
+      color: #fff;
+    }
+    .card {
+      background-image: url("/background-2.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+      font-family: Georgia ,serif;
+      font-weight: bold;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .btn-custom {
+      background-color: #8b4513;
+      color: #fff;
+      border-radius: 20px;
+    }
+    .btn-custom:hover {
+      background-color: #a0522d;
+    }
+    .filter-section {
+      background-image: url("/background-2.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: Georgia ,serif;
+      border: 1px solid #f5f5dc;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-weight: bold;
+      width: 98%;
+    }
+    .filter-section h4 {
+      color: #4b3621;
+      font-weight: bolder;
+    }
+    .filter-section .form-label {
+      color: #4b3621;
+      font-weight: bolder;
+    }
+    .filter-section .form-control,
+    .filter-section .form-select {
+      border-radius: 10px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .filter-section .btn-custom {
+      width: 100%;
+    }
+    .add-book-btn {
+      position: relative;
+      bottom: 40px;
+      right: 40px;
+    }
+    .footer {
+      margin-top: auto;
+      width: 100%;
+      background-color: #4b3621;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+    .card-title {
+      font-weight: bolder;
+    }
+    .card-subtitle {
+      font-weight: bold;
+    }
+    .user {
+      background-image: url("/background-2.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      border-color: #4b3621;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+      font-family: Georgia ,serif;
+    }
+    .user-text{
+      font-weight: lighter;
+      font-size: 13px;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Book Management</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="row justify-content-center">
+<div class="col-2 d-flex col align-items-start page">
+  <div class="user text-start m-4 p-2">
+    <h5 class="ml-3 mb-2">Your Data:</h5>
+    <div class="user-body" th:each="client: ${clients}">
+      <p class="user-title" th:text="${client.name}">[client.name]</p>
+      <p class="user-subtitle mb-2 text-muted" th:text="${client.email}">[client.email]</p>
+      <div style="width: 90%; height: 2px; background-color: #4b3621; margin: 5px 0;"></div>
+      <p>You're favourites:</p>
+      <p class="user-text" th:each="book: ${client.getBookList()}" th:text="${' - ' + book.name}">[genre.name]</p>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4 col-10">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="filter-section">
+        <h4>Filter Books</h4>
+        <form id="filter-form" class="row g-3 flex-row justify-content-center">
+          <div class="col-md-4">
+            <label for="f3" class="form-label">Artist Name</label>
+            <select id="f3" name="artistName" class="form-select">
+              <option value="">Registered</option>
+              <option th:each="artist : ${artists}" th:value="${artist.toString()}" th:text="${artist.toString()}">[artist]</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="f1" class="form-label">Publication Year</label>
+            <input id="f1" type="date" name="publicationYear" class="form-control" />
+          </div>
+          <div class="col-md-4">
+            <label for="f2" class="form-label">Genre</label>
+            <select id="f2" name="genre" class="form-select">
+              <option value="">All</option>
+              <option th:each="genre: ${genres}" th:value="${genre}" th:text="${genre}">[genre]</option>
+            </select>
+          </div>
+          <div class="col-md-4 d-flex align-items-end w-25">
+            <button id="filter" type="submit" class="btn btn-custom">Filter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row flex-grow-1">
+    <div class="row">
+    <div class="col-md-6 mb-4" th:each="book: ${books}">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${book.name}">[book.title]</h5>
+          <h6 class="card-subtitle mb-2 text-muted" th:text="${book.artistName}">[book.author]</h6>
+          <p class="card-text" th:text="${book.dateWritten}">[book.publicationYear]</p>
+          <p class="card-text" th:each="genre: ${book.getGenre()}" th:text="${genre}">[genre.name]</p>
+          <div>
+            <a href="/books/edit" th:href="@{'/books/{id}/edit' (id=${book.id})}" class="btn btn-custom mb-2">Edit</a>
+            <form method="post" th:action="@{'/books/{id}/delete' (id=${book.id})}" class="d-inline">
+              <button type="submit" class="btn btn-danger mb-2">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    </div>
+
+</div>
+</div>
+<div class="">
+  <div class="">
+    <div class="text-end mb-4">
+      <a href="/books/add" class="btn btn-custom add-book-btn">Add New Book</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <span>&copy; 2024 Book Management</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
