@@ -16,7 +16,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '22'
           distribution: 'temurin' # You can change this to another distribution if needed
 
       - name: Build with Maven (skip tests)
@@ -64,7 +64,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '22'
           distribution: 'temurin'
 
       - name: Build with Maven (skip tests)
