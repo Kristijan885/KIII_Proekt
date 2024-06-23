@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: Book-Ranker
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: db
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: Book-Ranker
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30091
+  selector:
+    app: backend
