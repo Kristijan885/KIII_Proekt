@@ -36,7 +36,7 @@ jobs:
         with:
           context: ./
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/booker-spring-kiii
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/booker-spring-kiii:latest
 
   integration-test:
     runs-on: ubuntu-latest
