@@ -1,5 +1,5 @@
 # Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim AS build
+FROM openjdk:22-jdk-slim AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -11,12 +11,12 @@ COPY . .
 RUN ./mvnw package -DskipTests
 
 # Second stage: Run the application
-FROM openjdk:17-jdk-slim
+FROM openjdk:22-jdk-slim
 
 WORKDIR /app
 
-COPY --from=build /app/target/sticky-notes-kiii-0.0.1-SNAPSHOT.jar sticky-notes-kiii.jar
+COPY --from=build /app/target/Book_Ranker_KIII-0.0.1-SNAPSHOT.jar booker.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "sticky-notes-kiii.jar"]
+ENTRYPOINT ["java", "-jar", "booker.jar"]
