@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: db
-  namespace: Book-Ranker
+  namespace: book-ranker
 spec:
   serviceName: 'db'
   replicas: 1
@@ -55,7 +55,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: image-storage-pvc
-  namespace: Book-Ranker
+  namespace: book-ranker
 spec:
   accessModes:
     - ReadWriteOnce
