@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: kristijan885/booker-spring-kiii
+    image: kristijan885/booker-spring-kiii:latest
     platform: linux/amd64
     container_name: spring-app
     ports:
