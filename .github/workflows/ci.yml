@@ -38,7 +38,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/booker-spring-kiii:latest
 
-  integration-test:
+  test-containers:
     runs-on: ubuntu-latest
     needs: [build-and-push-backend]
 
